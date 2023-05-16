@@ -1,22 +1,4 @@
-#include <iostream>
-#include <string>
-
-std::pair<std::string, std::string> foo(std::string &input_string) {//решение работает за О(n) - линейная сложность
-    int min_idx = 0, max_idx = 0;
-    for (int i = 1; i < input_string.size(); i++) {
-        if (input_string[min_idx] >= input_string[i] && input_string[i] != '0') {
-            min_idx = i;
-        }
-        if (input_string[max_idx] <= input_string[i] && input_string[i] != '0') {
-            max_idx = i;
-        }
-    }
-    std::string first(input_string);
-    std::string second(input_string);
-    std::swap(first[0], first[min_idx]);
-    std::swap(second[0], second[max_idx]);
-    return std::pair<std::string, std::string> (first, second);
-}
+#include "foo6.h"
 
 bool test() {
     bool res = true;
@@ -54,14 +36,6 @@ bool test() {
 }
 
 int main() {
-    if (test()) {
-        int n;
-        std::cin >> n;
-        for (int i = 0; i < n; i++) {
-            std::string input_string;
-            std::cin >> input_string;
-            std::pair<std::string, std::string> result = foo(input_string);
-            std::cout << result.first << " " << result.second << " ";
-        }
-    }
+    test();
+    return 0;
 }

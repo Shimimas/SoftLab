@@ -1,20 +1,4 @@
-#include <algorithm>
-#include <string>
-#include <iostream>
-#include <set>
-#include <fstream>
-
-int foo(const std::set <std::string> &words, std::string s) { // решение работает за О(n * log(n))
-    std::string s_tmp = s;
-    int counter = 0;
-    std::sort(s.begin(), s.end());
-    do {
-        if (words.count(s) && s_tmp != s) {
-            counter++;
-        }
-    } while(std::next_permutation(s.begin(), s.end()));
-    return counter;
-}
+#include "foo7.h"
 
 void test(const std::set <std::string> &words) {
     int res = foo(words, "bat");
@@ -55,11 +39,5 @@ int main()
         words.insert(line);
     }
     test(words);
-    int n;
-    std::cin >> n;
-    for (int i = 0; i < n; i++) {
-        std::string s;
-        std::cin >> s;
-        std::cout << foo(words, s) << " ";
-    }
+    return 0;
 }

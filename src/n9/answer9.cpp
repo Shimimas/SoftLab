@@ -36,7 +36,7 @@ void Words::create_map() {
         if (w.size() == 5) {
             for (auto v : words) {
                 if (v.size() == 5) {
-                    for (int i = 0; i < w.size(); i++) {
+                    for (int i = 0; i < (int)w.size(); i++) {
                         char tmp = w[i];
                         w[i] = v[i];
                         if (w == v) {
@@ -51,7 +51,7 @@ void Words::create_map() {
     }
 }
 
-int Words::Answer() {//алгоритм работает за константное время, но большое, т к реализован на основе алгоритма поиска в ширину, а за основу взят словарь с константным размером
+int Words::Answer() {
     std::queue <std::string> q;
     q.push(start);
     std::set <std::string> used;
@@ -75,35 +75,19 @@ int Words::Answer() {//алгоритм работает за константн
     return d[end] + 1;
 }
 
-void test(Words &words) {
-    words.ChangeVertex("girls", "women");
-    int res = words.Answer();
-    if (res == 9) {
-        std::cout << "OK" << std::endl;
-    } else {
-        std::cout << "WRONG ANSWER" << std::endl;
-        std::cout << "EXPECTED 9 ANSWER " << res << std::endl;
-    }
-    words.ChangeVertex("mayor", "clown");
-    res = words.Answer();
-    if (res == 14) {
-        std::cout << "OK" << std::endl;
-    } else {
-        std::cout << "WRONG ANSWER" << std::endl;
-        std::cout << "EXPECTED 14 ANSWER " << res << std::endl;
-    }
-}
-
 int main()
 {   
     Words w;
-    test(w);
     int n;
     std::cin >> n;
+    std::vector<int> res_vector;
     for (int i = 0; i < n; i++) {
         std::string s, e;
         std::cin >> s >> e;
         w.ChangeVertex(s, e);
-        std::cout << w.Answer() << " ";
+        res_vector.push_back(w.Answer());
+    }
+    for (int c : res_vector) {
+        std::cout << c << " ";
     }
 }
